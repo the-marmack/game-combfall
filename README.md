@@ -3,8 +3,10 @@
 An original falling-block browser game on a honeycomb. Clusters of hexagonal cells drift down into the comb; complete a
 row to seal it and score. The game ends when the comb fills to the top.
 
-Play it at <https://the-marmack.github.io/game-combfall/>. It needs no sign-in, and your best score and mute choice stay
-in your browser.
+Play at https://the-marmack.github.io/game-combfall/
+
+It needs no sign-in, and your best score and mute choice stay in your browser. A push to `main` runs the tests and
+publishes the `web` folder to GitHub Pages.
 
 ## How to play
 
