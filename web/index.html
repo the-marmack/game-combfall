@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#17100a" />
+    <meta name="description" content="Combfall: guide clusters of honey down into the hive and seal the comb, row by row." />
+    <title>Combfall</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="title">
+      <svg class="bee" viewBox="0 0 48 40" aria-hidden="true">
+        <ellipse class="wing" cx="19" cy="11" rx="8" ry="10" transform="rotate(-24 19 11)" />
+        <ellipse class="wing" cx="31" cy="11" rx="7" ry="9" transform="rotate(20 31 11)" />
+        <ellipse class="body" cx="24" cy="26" rx="17" ry="11" />
+        <path class="band" d="M18 15.8c-2 6.5-2 13.9 0 20.4h5c-2-6.5-2-13.9 0-20.4z" />
+        <path class="band" d="M28 15.3c-2 6.8-2 14.6 0 21.4h5c-2-6.8-2-14.6 0-21.4z" />
+        <circle class="band" cx="39" cy="24" r="1.6" />
+      </svg>
+      <div>
+        <h1>Combfall</h1>
+        <p class="tagline">Bring in the honey. Seal the comb.</p>
+      </div>
+    </header>
+
+    <main class="game">
+      <div class="comb-frame">
+        <canvas id="comb" width="572" height="780" aria-label="The honeycomb"></canvas>
+      </div>
+
+      <section class="panel" aria-label="Game status">
+        <dl class="stats">
+          <div>
+            <dt>Score</dt>
+            <dd id="score">0</dd>
+          </div>
+          <div>
+            <dt>Level</dt>
+            <dd id="level">1</dd>
+          </div>
+          <div>
+            <dt>Best</dt>
+            <dd id="best">0</dd>
+          </div>
+        </dl>
+
+        <figure class="next">
+          <figcaption>Next</figcaption>
+          <canvas id="next" width="160" height="120" aria-label="The next piece"></canvas>
+        </figure>
+
+        <div class="actions">
+          <button id="pause" type="button">Pause</button>
+          <button id="mute" type="button">Mute</button>
+          <button id="restart" type="button">Restart</button>
+        </div>
+      </section>
+
+      <nav class="touch" aria-label="Touch controls">
+        <button id="left" type="button" aria-label="Move left">&#9664;</button>
+        <button id="rotate" type="button" aria-label="Rotate">&#8635;</button>
+        <button id="drop" type="button" aria-label="Drop">&#9660;</button>
+        <button id="right" type="button" aria-label="Move right">&#9654;</button>
+      </nav>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,239 @@
+:root {
+  --hive: #17100a;
+  --cell: #2a1d10;
+  --wax: #4a3218;
+  --amber: #c9780f;
+  --honey: #ffc93c;
+  --pollen: #ffe8a3;
+
+  /* The comb is 11 × √3 wide for every 26 tall, in cell sizes. */
+  --comb-ratio: 0.7328;
+  /* Height the title, status and touch buttons leave for the comb on a phone. */
+  --phone-chrome: 13.5rem;
+  --gap: 0.75rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: var(--gap) max(var(--gap), env(safe-area-inset-right)) max(var(--gap), env(safe-area-inset-bottom))
+    max(var(--gap), env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+  background: radial-gradient(circle at 50% 0%, var(--cell), var(--hive) 70%) fixed var(--hive);
+  color: var(--pollen);
+  font-family: Georgia, 'Iowan Old Style', serif;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bee {
+  width: 2.5rem;
+  height: 2.1rem;
+  flex: none;
+}
+
+.bee .wing {
+  fill: var(--pollen);
+  opacity: 0.55;
+}
+
+.bee .body {
+  fill: var(--honey);
+}
+
+.bee .band {
+  fill: var(--hive);
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--honey);
+}
+
+.tagline {
+  margin: 0.15rem 0 0;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* Phone first: status, then the comb, then the touch buttons. */
+.game {
+  display: grid;
+  grid-template-areas: 'panel' 'comb' 'touch';
+  justify-items: center;
+  gap: var(--gap);
+  width: 100%;
+}
+
+.comb-frame {
+  grid-area: comb;
+  width: min(100%, calc((100dvh - var(--phone-chrome)) * var(--comb-ratio)));
+  aspect-ratio: var(--comb-ratio);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#comb {
+  border-radius: 0.5rem;
+  touch-action: none;
+}
+
+.panel {
+  grid-area: panel;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.25rem var(--gap);
+  width: 100%;
+  max-width: 28rem;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap);
+  margin: 0;
+}
+
+dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+dd {
+  margin: 0;
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--honey);
+}
+
+.next {
+  grid-row: span 2;
+  margin: 0;
+  width: 4.5rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.next canvas {
+  height: auto;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--wax);
+  border-radius: 0.35rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+button {
+  flex: 1;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--wax);
+  border-radius: 0.4rem;
+  background: var(--cell);
+  color: var(--pollen);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:hover {
+  border-color: var(--amber);
+}
+
+button:active {
+  background: var(--amber);
+  color: var(--hive);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--honey);
+  outline-offset: 1px;
+}
+
+.touch {
+  grid-area: touch;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 28rem;
+}
+
+.touch button {
+  height: 3rem;
+  font-size: 1.25rem;
+}
+
+/* Touch buttons stay unless the device has a real pointer. */
+@media (hover: hover) and (pointer: fine) {
+  .touch {
+    display: none;
+  }
+}
+
+/* Wide screens: the comb on the left, the status beside it. */
+@media (min-width: 42rem) {
+  :root {
+    --gap: 1rem;
+  }
+
+  .game {
+    grid-template-areas: 'comb panel' 'comb touch';
+    grid-template-columns: auto 14rem;
+    grid-template-rows: auto 1fr;
+    justify-content: center;
+    justify-items: stretch;
+    align-items: start;
+  }
+
+  .comb-frame {
+    width: calc((100dvh - 7rem) * var(--comb-ratio));
+    max-width: calc(100vw - 14rem - 3 * var(--gap));
+  }
+
+  .panel {
+    grid-template-columns: 1fr;
+    gap: var(--gap);
+  }
+
+  .stats {
+    flex-direction: column;
+  }
+
+  .next {
+    grid-row: auto;
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
